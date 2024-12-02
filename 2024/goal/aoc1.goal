@@ -1,0 +1,7 @@
+i: +"v"$=-read "i/01"  / input
+s: ^' i                / sorted
+
+say +/abs-/s           / part1: sum of absolute difference
+
+d: (?*|s)!=%*|s        / value->count for right
+say +/{x*d[x]}(*s)     / part2: sum of left * count in right

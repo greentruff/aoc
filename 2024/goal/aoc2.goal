@@ -1,0 +1,12 @@
+i: "v"$read"i/02"
+
+diff: {-/2^x}
+check: {(&/(x>0)&(x<4))|(&/(x<0)&(x>-4))}
+safe: {check diff x}
+
+say +/safe'i / part1
+
+skip: {x@(!#x){(,x)^y}`(!#x)}
+safeSkip: {(safe x)||/safe'skip x}
+
+say +/safeSkip'i
