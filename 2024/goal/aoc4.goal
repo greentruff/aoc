@@ -1,34 +1,23 @@
-I:-1 _ =read"i/04"
+I:-1 _ ""\-=read"i/04"
 
-cnt: {+/#'rx/XMAS/[x;-1]}                      / count S in matrix
-toc: ""\
-tos: ""/
-diag: {tos (+ (!&*x) rotate'toc (+[;" "]'x))}  / downright diags matrix
-mirr: {tos@|' toc x}
+S:"XMAS"
 
-M: mirr I                                      / vertical symmetry
-F: tos@+ toc I                               / diagonal symmetry
-
-/ ....XXMAS.
-/ .SAMXMS...
-/ ...S..A...
-/ ..A.A.MS.X
-/ XMASAMX.MM
-/ X.....XA.A
-/ S.S.S.S.SS
-/ .A.A.A.A.A
-/ ..M.M.M.MM
-/ .X.X.XMASX
+diag: {+ (!#*x) rotate'x,'" "}      / downright diags matrix
+ldiag: {=(,/x)!,/n+((#x)#,(n:!#x))} / downleft diags
 
 r: (
-    (cnt I)           /right
-    (cnt M)           /left
-    (cnt F)           /down
-    (cnt (mirr F))    /up
-    (cnt (diag I))    /down right
-    (cnt (diag M))    /down left
-    (cnt (diag (|I))) /up right
-    (cnt (diag (|M))) /up left
+    I           /right
+    |'I         /left
+    +I          /down
+    |'+I        /up
+    diag I      /down right
+    diag@|'I    /down left
+    diag@|I     /up right
+    diag@||'I   /up left
 )
 
-say +/r / part1
+say +/ (+/S#)' ""/'r   / part1
+
+sq: ,/(+3^)'+'(+3^I)
+m: {(x[1;1]="A")&((!"M M S S")~^(,/x[0 2;0 2]))&(~x[0;0]=x[2;2])}
+say +/ m' sq           / part2
