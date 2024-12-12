@@ -1,4 +1,4 @@
-Parse ← :⍉◇⊓(⊜(⊜⋕≠@|.)≠@\n.|⊜(□⊜⋕≠@,.)≠@\n.) °⊟⊜□ ¬⦷"\n\n".
+Parse ← :⍉⊓(⊜(⊜⋕≠@|.)≠@\n.|⊜(□⊜⋕≠@,.)≠@\n.) °$"_\n\n_"
 
 # Sorts the pages by repeatedly taking pages that have no rule for next
 Order ← |1 (
@@ -17,26 +17,18 @@ TopoSort ← (
 )
 Middle ← ⊡⌊÷2⧻.
 
-Part₁ ← (
-  ⊙¤
-  ≡(
-    TopoSort
-    ⊸⊗
-    Middle ×/↧⧈/>2
-  )
-  /+
-)
+Part₁ ← /+ ≡(
+  TopoSort
+  ×/↧⧈/>2 ⊸⊗
+  Middle
+) ⊙¤
 
-Part₂ ← (
-  ⊙¤
-  ≡(
-    TopoSort
-    ⟜∩⍏
-    ×⊙(/↥≠)
-    Middle
-  )
-  /+
-)
+Part₂ ← /+ ≡(
+  TopoSort
+  ×⊙(/↥≠) ⟜∩⍏
+  Middle
+) ⊙¤
+
 ┌─╴Tests
   Example ← $ 47|53
             $ 97|13
@@ -66,12 +58,12 @@ Part₂ ← (
             $ 75,97,47,61,53
             $ 61,13,29
             $ 97,13,75,29,47
-  
+
   ⍤⤙≍ 143 Part₁ Parse Example
   ⍤⤙≍ 123 Part₂ Parse Example
 └─╴
 
 Input ← Parse &fras "inputs/05.txt"
 
-# &p $"Part1: _" Part₁ Input # 7024
-# &p $"Part2: _" Part₂ Input # 4151
+&p $"Part1: _" Part₁ Input # 7024
+&p $"Part2: _" Part₂ Input # 4151
