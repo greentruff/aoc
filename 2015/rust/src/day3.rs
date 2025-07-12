@@ -6,7 +6,7 @@ struct Coord {
     y: i32,
 }
 
-fn visited_count(input: &String, santa_count: usize) -> usize {
+fn visited_count(input: &str, santa_count: usize) -> usize {
     let mut visited = HashSet::new();
 
     let mut positions = Vec::with_capacity(santa_count);
@@ -33,11 +33,11 @@ fn visited_count(input: &String, santa_count: usize) -> usize {
     visited.len()
 }
 
-pub fn solve(input: &String) {
-    let count = visited_count(input, 1);
+pub fn solve(input: impl AsRef<str>) {
+    let count = visited_count(input.as_ref(), 1);
     println!("Part 1: {count}");
 
-    let count = visited_count(input, 2);
+    let count = visited_count(input.as_ref(), 2);
     println!("Part 2: {count}");
 }
 
@@ -47,15 +47,15 @@ mod tests {
 
     #[test]
     fn part1() {
-        assert_eq!(visited_count(&">".into(), 1), 2);
-        assert_eq!(visited_count(&"^>v<".into(), 1), 4);
-        assert_eq!(visited_count(&"^v^v^v^v^v".into(), 1), 2);
+        assert_eq!(visited_count(">", 1), 2);
+        assert_eq!(visited_count("^>v<", 1), 4);
+        assert_eq!(visited_count("^v^v^v^v^v", 1), 2);
     }
 
     #[test]
     fn part2() {
-        assert_eq!(visited_count(&"^v".into(), 2), 3);
-        assert_eq!(visited_count(&"^>v<".into(), 2), 3);
-        assert_eq!(visited_count(&"^v^v^v^v^v".into(), 2), 11);
+        assert_eq!(visited_count("^v", 2), 3);
+        assert_eq!(visited_count("^>v<", 2), 3);
+        assert_eq!(visited_count("^v^v^v^v^v", 2), 11);
     }
 }

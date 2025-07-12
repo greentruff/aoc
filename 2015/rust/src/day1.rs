@@ -1,5 +1,6 @@
-pub fn solve(input: &String) {
+pub fn solve(input: impl AsRef<str>) {
     let part1: i32 = input
+        .as_ref()
         .chars()
         .map(|c| match c {
             '(' => 1,
@@ -10,7 +11,7 @@ pub fn solve(input: &String) {
     println!("Part 1: {part1}");
 
     let mut running_sum: i32 = 0;
-    for (index, c) in input.chars().enumerate() {
+    for (index, c) in input.as_ref().chars().enumerate() {
         running_sum += match c {
             '(' => 1,
             ')' => -1,
