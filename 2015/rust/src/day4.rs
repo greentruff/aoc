@@ -131,12 +131,12 @@ pub fn solve(input: impl AsRef<str>) {
     while !md5(format!("{}{}", input.as_ref(), suffix).as_str()).starts_with("00000") {
         suffix += 1;
     }
-    println!("Part 1: {}", suffix);
+    println!("Part 1: {suffix}");
 
     while !md5(format!("{}{}", input.as_ref(), suffix).as_str()).starts_with("000000") {
         suffix += 1;
     }
-    println!("Part 2: {}", suffix);
+    println!("Part 2: {suffix}");
 }
 
 #[cfg(test)]

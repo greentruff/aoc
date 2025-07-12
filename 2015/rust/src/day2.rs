@@ -12,7 +12,7 @@ impl Present {
     }
 
     fn ribbon_needed(&self) -> u32 {
-        let mut lengths = vec![self.0, self.1, self.2];
+        let mut lengths = [self.0, self.1, self.2];
         lengths.sort();
 
         2 * lengths[0] + 2 * lengths[1] + lengths.iter().product::<u32>()
