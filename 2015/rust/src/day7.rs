@@ -109,27 +109,27 @@ impl<'a> Circuit<'a> {
 
     fn try_op(&self, conn: &Conn) -> Result<u16, CircuitError> {
         match &conn.op {
-            Op::Set(from_id) => match self.get_value(&from_id) {
+            Op::Set(from_id) => match self.get_value(from_id) {
                 Ok(from) => Ok(from),
                 Err(err) => Err(err),
             },
-            Op::And(left_id, right_id) => match self.get_values(&left_id, &right_id) {
+            Op::And(left_id, right_id) => match self.get_values(left_id, right_id) {
                 Ok((left, right)) => Ok(left & right),
                 Err(err) => Err(err),
             },
-            Op::Or(left_id, right_id) => match self.get_values(&left_id, &right_id) {
+            Op::Or(left_id, right_id) => match self.get_values(left_id, right_id) {
                 Ok((left, right)) => Ok(left | right),
                 Err(err) => Err(err),
             },
-            Op::LShift(from_id, n) => match self.get_value(&from_id) {
+            Op::LShift(from_id, n) => match self.get_value(from_id) {
                 Ok(from) => Ok(from << n),
                 Err(err) => Err(err),
             },
-            Op::RShift(from_id, n) => match self.get_value(&from_id) {
+            Op::RShift(from_id, n) => match self.get_value(from_id) {
                 Ok(from) => Ok(from >> n),
                 Err(err) => Err(err),
             },
-            Op::Not(from_id) => match self.get_value(&from_id) {
+            Op::Not(from_id) => match self.get_value(from_id) {
                 Ok(from) => Ok(!from),
                 Err(err) => Err(err),
             },

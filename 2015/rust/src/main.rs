@@ -10,6 +10,7 @@ mod day5;
 mod day6;
 mod day7;
 mod day8;
+mod day9;
 
 fn solve_for_day(day: u32) -> Result<Solution, AocError> {
     let input = get_day_input(2015, day)?;
@@ -22,6 +23,7 @@ fn solve_for_day(day: u32) -> Result<Solution, AocError> {
         6 => day6::solve(&input),
         7 => day7::solve(&input),
         8 => day8::solve(&input),
+        9 => day9::solve(&input),
         _ => unimplemented!(),
     };
     Ok(solution)
@@ -40,7 +42,7 @@ fn main() -> Result<(), AocError> {
         let solution = solve_for_day(day)?;
         print_solution(solution);
     } else {
-        for day in 1..=8 {
+        for day in 1..=9 {
             let solution = solve_for_day(day)?;
             print_solution(solution);
         }
