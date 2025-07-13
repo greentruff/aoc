@@ -1,5 +1,5 @@
 use crate::aoc::Solution;
-use crate::day7::CircuitError::UninitializedInputs;
+use crate::day07::CircuitError::UninitializedInputs;
 use regex::Regex;
 use std::collections::HashMap;
 use thiserror::Error;
