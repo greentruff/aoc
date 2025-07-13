@@ -1,3 +1,4 @@
+use crate::aoc::Solution;
 use std::collections::HashSet;
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone)]
@@ -33,12 +34,11 @@ fn visited_count(input: &str, santa_count: usize) -> usize {
     visited.len()
 }
 
-pub fn solve(input: impl AsRef<str>) {
-    let count = visited_count(input.as_ref(), 1);
-    println!("Part 1: {count}");
+pub fn solve(input: impl AsRef<str>) -> Solution {
+    let part1 = visited_count(input.as_ref(), 1);
+    let part2 = visited_count(input.as_ref(), 2);
 
-    let count = visited_count(input.as_ref(), 2);
-    println!("Part 2: {count}");
+    Solution::new(3, &part1, &part2)
 }
 
 #[cfg(test)]

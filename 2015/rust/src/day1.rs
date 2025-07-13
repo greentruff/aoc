@@ -1,4 +1,6 @@
-pub fn solve(input: impl AsRef<str>) {
+use crate::aoc::Solution;
+
+pub fn solve(input: impl AsRef<str>) -> Solution {
     let part1: i32 = input
         .as_ref()
         .chars()
@@ -8,9 +10,9 @@ pub fn solve(input: impl AsRef<str>) {
             _ => 0,
         })
         .sum();
-    println!("Part 1: {part1}");
 
     let mut running_sum: i32 = 0;
+    let part2: usize;
     for (index, c) in input.as_ref().chars().enumerate() {
         running_sum += match c {
             '(' => 1,
@@ -20,8 +22,10 @@ pub fn solve(input: impl AsRef<str>) {
 
         if running_sum < 0 {
             let pos = index + 1;
-            println!("Part 2: {pos}");
-            break;
+            part2 = pos;
+            return Solution::new(1, &part1, &part2);
         }
     }
+
+    unreachable!()
 }

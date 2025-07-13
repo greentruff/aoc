@@ -1,3 +1,4 @@
+use crate::aoc::Solution;
 use std::cmp::min;
 
 struct Present(u32, u32, u32);
@@ -19,7 +20,7 @@ impl Present {
     }
 }
 
-pub fn solve(input: impl AsRef<str>) {
+pub fn solve(input: impl AsRef<str>) -> Solution {
     let presents: Vec<Present> = input
         .as_ref()
         .split_terminator("\n")
@@ -30,10 +31,9 @@ pub fn solve(input: impl AsRef<str>) {
         .collect();
 
     let part1: u32 = presents.iter().map(|x| x.paper_needed()).sum();
-    println!("Part 1: {part1}");
-
     let part2: u32 = presents.iter().map(|x| x.ribbon_needed()).sum();
-    println!("Part 2: {part2}");
+
+    Solution::new(2, &part1, &part2)
 }
 
 #[cfg(test)]

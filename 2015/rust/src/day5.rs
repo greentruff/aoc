@@ -1,3 +1,4 @@
+use crate::aoc::Solution;
 use std::collections::HashMap;
 use std::hash::Hash;
 
@@ -76,7 +77,7 @@ fn is_part2_nice(s: &str) -> bool {
     has_double_pair && has_split_pair
 }
 
-pub fn solve(input: impl AsRef<str>) {
+pub fn solve(input: impl AsRef<str>) -> Solution {
     let mut part1_count = 0;
     let mut part2_count = 0;
     for line in input.as_ref().lines() {
@@ -88,8 +89,7 @@ pub fn solve(input: impl AsRef<str>) {
         }
     }
 
-    println!("Part 1: {part1_count}");
-    println!("Part 2: {part2_count}");
+    Solution::new(5, &part1_count, &part2_count)
 }
 
 #[cfg(test)]

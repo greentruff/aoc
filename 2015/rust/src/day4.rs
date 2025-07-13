@@ -1,3 +1,5 @@
+use crate::aoc::Solution;
+
 #[rustfmt::skip]
 const MD5_S : [u32; 64 ] = [
     7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
@@ -126,17 +128,19 @@ fn md5(input: &str) -> String {
     digest
 }
 
-pub fn solve(input: impl AsRef<str>) {
-    let mut suffix = 0_u64;
+pub fn solve(input: impl AsRef<str>) -> Solution {
+    let mut suffix = 0_u32;
     while !md5(format!("{}{}", input.as_ref(), suffix).as_str()).starts_with("00000") {
         suffix += 1;
     }
-    println!("Part 1: {suffix}");
+    let part1 = suffix;
 
     while !md5(format!("{}{}", input.as_ref(), suffix).as_str()).starts_with("000000") {
         suffix += 1;
     }
-    println!("Part 2: {suffix}");
+    let part2 = suffix;
+
+    Solution::new(4, &part1, &part2)
 }
 
 #[cfg(test)]
