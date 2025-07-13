@@ -1,9 +1,9 @@
 use crate::aoc::Solution;
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
-    let repr_count: usize = input.as_ref().lines().map(len_repr).sum();
-    let parsed_count: usize = input.as_ref().lines().map(len_parsed).sum();
-    let escaped_count: usize = input.as_ref().lines().map(len_escaped).sum();
+pub fn solve(input: &str) -> Solution {
+    let repr_count: usize = input.lines().map(len_repr).sum();
+    let parsed_count: usize = input.lines().map(len_parsed).sum();
+    let escaped_count: usize = input.lines().map(len_escaped).sum();
 
     let part1 = repr_count - parsed_count;
     let part2 = escaped_count - repr_count;

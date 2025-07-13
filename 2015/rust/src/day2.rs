@@ -20,9 +20,8 @@ impl Present {
     }
 }
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
+pub fn solve(input: &str) -> Solution {
     let presents: Vec<Present> = input
-        .as_ref()
         .split_terminator("\n")
         .map(|line| {
             let dimensions: Vec<u32> = line.splitn(3, 'x').map(|d| d.parse().unwrap()).collect();

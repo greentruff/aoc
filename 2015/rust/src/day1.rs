@@ -1,8 +1,7 @@
 use crate::aoc::Solution;
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
+pub fn solve(input: &str) -> Solution {
     let part1: i32 = input
-        .as_ref()
         .chars()
         .map(|c| match c {
             '(' => 1,
@@ -13,7 +12,7 @@ pub fn solve(input: impl AsRef<str>) -> Solution {
 
     let mut running_sum: i32 = 0;
     let part2: usize;
-    for (index, c) in input.as_ref().chars().enumerate() {
+    for (index, c) in input.chars().enumerate() {
         running_sum += match c {
             '(' => 1,
             ')' => -1,

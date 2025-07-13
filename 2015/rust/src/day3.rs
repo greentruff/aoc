@@ -34,9 +34,9 @@ fn visited_count(input: &str, santa_count: usize) -> usize {
     visited.len()
 }
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
-    let part1 = visited_count(input.as_ref(), 1);
-    let part2 = visited_count(input.as_ref(), 2);
+pub fn solve(input: &str) -> Solution {
+    let part1 = visited_count(input, 1);
+    let part2 = visited_count(input, 2);
 
     Solution::new(3, &part1, &part2)
 }

@@ -126,9 +126,9 @@ fn parse_op(input: &str) -> Operation {
     Operation { from, to, action }
 }
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
+pub fn solve(input: &str) -> Solution {
     let mut grid = Grid::new();
-    for op in input.as_ref().lines().map(parse_op) {
+    for op in input.lines().map(parse_op) {
         for p in range(op.from, op.to) {
             match op.action {
                 Action::TurnOn => grid.turn_on(p),
@@ -140,7 +140,7 @@ pub fn solve(input: impl AsRef<str>) -> Solution {
     let part1 = grid.count_on();
 
     let mut grid = Grid::new();
-    for op in input.as_ref().lines().map(parse_op) {
+    for op in input.lines().map(parse_op) {
         for p in range(op.from, op.to) {
             match op.action {
                 Action::TurnOn => grid.brightness_up(p, 1),

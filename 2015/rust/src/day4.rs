@@ -128,14 +128,14 @@ fn md5(input: &str) -> String {
     digest
 }
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
+pub fn solve(input: &str) -> Solution {
     let mut suffix = 0_u32;
-    while !md5(format!("{}{}", input.as_ref(), suffix).as_str()).starts_with("00000") {
+    while !md5(format!("{input}{suffix}").as_str()).starts_with("00000") {
         suffix += 1;
     }
     let part1 = suffix;
 
-    while !md5(format!("{}{}", input.as_ref(), suffix).as_str()).starts_with("000000") {
+    while !md5(format!("{input}{suffix}").as_str()).starts_with("000000") {
         suffix += 1;
     }
     let part2 = suffix;
