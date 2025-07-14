@@ -1,4 +1,5 @@
 use crate::aoc::Solution;
+use crate::utils::StringToId;
 use itertools::Itertools;
 use itertools::MinMaxResult::MinMax;
 use regex::Regex;
@@ -7,14 +8,12 @@ use std::collections::HashMap;
 pub fn solve(input: &str) -> Solution {
     let distance_list = input.lines().map(parse_line).collect::<Vec<_>>();
 
-    let mut city_ids = HashMap::new();
+    let mut city_ids = StringToId::new();
     let mut distances = HashMap::new();
 
     for (city1, city2, dx) in distance_list {
-        let next_id = city_ids.len();
-        let from = *city_ids.entry(city1).or_insert(next_id);
-        let next_id = city_ids.len();
-        let to = *city_ids.entry(city2).or_insert(next_id);
+        let from = city_ids.get(&city1);
+        let to = city_ids.get(&city2);
 
         distances.insert(order_pair(from, to), dx);
     }
