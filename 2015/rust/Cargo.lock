@@ -24,7 +24,6 @@ dependencies = [
  "directories",
  "itertools",
  "regex",
- "serde",
  "serde_json",
  "thiserror",
  "ureq",
