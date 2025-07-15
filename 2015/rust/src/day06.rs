@@ -4,7 +4,7 @@ use std::cmp::max;
 use std::cmp::min;
 
 struct Grid {
-    lights: Vec<Vec<u32>>,
+    lights: [[u32; 1000]; 1000],
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -14,9 +14,9 @@ struct Point {
 }
 
 impl Grid {
-    fn new() -> Grid {
-        let lights = vec![vec![0; 1000]; 1000];
-        Grid { lights }
+    fn new() -> Box<Grid> {
+        let lights = [[0; 1000]; 1000];
+        Box::new(Grid { lights })
     }
     fn turn_on(&mut self, p: Point) {
         self.lights[p.y][p.x] = 1;

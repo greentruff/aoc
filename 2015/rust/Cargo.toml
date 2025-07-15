@@ -6,7 +6,6 @@ edition = "2024"
 [profile.release]
 strip = "symbols"
 panic = "abort"
-lto = "thin"
 
 [dependencies]
 directories = "6.0.0"
