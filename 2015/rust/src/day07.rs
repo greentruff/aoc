@@ -206,10 +206,7 @@ impl CircuitParser {
     }
     fn parse_line(&self, line: &str) -> Conn {
         if let Some(cap) = self.re_value.captures(line) {
-            return Conn {
-                target: cap[2].into(),
-                op: Op::Set(cap[1].into()),
-            };
+            return Conn { target: cap[2].into(), op: Op::Set(cap[1].into()) };
         }
         if let Some(cap) = self.re_and.captures(line) {
             return Conn {
@@ -236,10 +233,7 @@ impl CircuitParser {
             };
         }
         if let Some(cap) = self.re_not.captures(line) {
-            return Conn {
-                target: cap[2].into(),
-                op: Op::Not(cap[1].into()),
-            };
+            return Conn { target: cap[2].into(), op: Op::Not(cap[1].into()) };
         }
         dbg!(line);
         unreachable!()

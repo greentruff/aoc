@@ -6,9 +6,7 @@ pub struct StringToId {
 }
 impl StringToId {
     pub fn new() -> Self {
-        StringToId {
-            known: HashMap::new(),
-        }
+        StringToId { known: HashMap::new() }
     }
     pub fn get(&mut self, str: &str) -> usize {
         let next_id = self.known.len();

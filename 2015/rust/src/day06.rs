@@ -74,18 +74,9 @@ impl Iterator for PointRange {
 }
 fn range(from: Point, to: Point) -> PointRange {
     PointRange {
-        start: Point {
-            x: min(from.x, to.x),
-            y: min(from.y, to.y),
-        },
-        end: Point {
-            x: max(from.x, to.x),
-            y: max(from.y, to.y),
-        },
-        next: Point {
-            x: min(from.x, to.x),
-            y: min(from.y, to.y),
-        },
+        start: Point { x: min(from.x, to.x), y: min(from.y, to.y) },
+        end: Point { x: max(from.x, to.x), y: max(from.y, to.y) },
+        next: Point { x: min(from.x, to.x), y: min(from.y, to.y) },
         done: false,
     }
 }
