@@ -19,9 +19,10 @@ mod day14;
 mod day15;
 mod day16;
 mod day17;
+mod day18;
 mod utils;
 
-const SOLVERS: [fn(&str) -> Solution; 17] = [
+const SOLVERS: [fn(&str) -> Solution; 18] = [
     day01::solve,
     day02::solve,
     day03::solve,
@@ -39,6 +40,7 @@ const SOLVERS: [fn(&str) -> Solution; 17] = [
     day15::solve,
     day16::solve,
     day17::solve,
+    day18::solve,
 ];
 
 fn solve_for_day(day: usize) -> Result<Solution, AocError> {
