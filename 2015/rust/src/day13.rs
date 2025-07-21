@@ -10,8 +10,8 @@ pub fn solve(input: &str) -> Solution {
     let mut happiness = HashMap::new();
 
     for (guest, neighbour, h) in &happiness_list {
-        let guest_id = guest_ids.get(guest);
-        let neighbour_id = guest_ids.get(neighbour);
+        let guest_id = guest_ids.get(guest).unwrap();
+        let neighbour_id = guest_ids.get(neighbour).unwrap();
         happiness.insert((guest_id, neighbour_id), *h);
     }
 

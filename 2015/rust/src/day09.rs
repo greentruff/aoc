@@ -12,8 +12,8 @@ pub fn solve(input: &str) -> Solution {
     let mut distances = HashMap::new();
 
     for (city1, city2, dx) in distance_list {
-        let from = city_ids.get(&city1);
-        let to = city_ids.get(&city2);
+        let from = city_ids.get(&city1).unwrap();
+        let to = city_ids.get(&city2).unwrap();
 
         distances.insert(order_pair(from, to), dx);
     }
