@@ -1,4 +1,4 @@
-use crate::aoc::{AocError, get_day_input};
+use crate::aoc::{AocError, Solution, get_day_input};
 use std::env::args;
 
 mod aoc;
@@ -9,9 +9,9 @@ mod day4;
 mod day5;
 mod day6;
 
-fn solve_for_day(day: u32) -> Result<(), AocError> {
+fn solve_for_day(day: u32) -> Result<Solution, AocError> {
     let input = get_day_input(2015, day)?;
-    match day {
+    let solution = match day {
         1 => day1::solve(&input),
         2 => day2::solve(&input),
         3 => day3::solve(&input),
@@ -19,19 +19,26 @@ fn solve_for_day(day: u32) -> Result<(), AocError> {
         5 => day5::solve(&input),
         6 => day6::solve(&input),
         _ => unimplemented!(),
-    }
-    Ok(())
+    };
+    Ok(solution)
+}
+
+fn print_solution(solution: Solution) {
+    println!("==== Day {:>2} ====", solution.day);
+    println!("Part 1: {}", solution.part1);
+    println!("Part 2: {}", solution.part2);
 }
 
 fn main() -> Result<(), AocError> {
     let args = args().skip(1).collect::<Vec<_>>();
     if !args.is_empty() {
         let day = args[0].parse::<u32>().unwrap();
-        solve_for_day(day)?;
+        let solution = solve_for_day(day)?;
+        print_solution(solution);
     } else {
         for day in 1..=6 {
-            println!("==== Day {day:>2} ====");
-            solve_for_day(day)?;
+            let solution = solve_for_day(day)?;
+            print_solution(solution);
         }
     }
 

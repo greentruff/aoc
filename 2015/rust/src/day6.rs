@@ -1,3 +1,4 @@
+use crate::aoc::Solution;
 use regex::Regex;
 use std::cmp::max;
 use std::cmp::min;
@@ -125,7 +126,7 @@ fn parse_op(input: &str) -> Operation {
     Operation { from, to, action }
 }
 
-pub fn solve(input: impl AsRef<str>) {
+pub fn solve(input: impl AsRef<str>) -> Solution {
     let mut grid = Grid::new();
     for op in input.as_ref().lines().map(parse_op) {
         for p in range(op.from, op.to) {
@@ -136,9 +137,7 @@ pub fn solve(input: impl AsRef<str>) {
             }
         }
     }
-
-    let count = grid.count_on();
-    println!("Part 1: {count}");
+    let part1 = grid.count_on();
 
     let mut grid = Grid::new();
     for op in input.as_ref().lines().map(parse_op) {
@@ -150,9 +149,9 @@ pub fn solve(input: impl AsRef<str>) {
             }
         }
     }
+    let part2 = grid.count_on();
 
-    let count = grid.count_on();
-    println!("Part 2: {count}");
+    Solution::new(6, &part1, &part2)
 }
 
 #[cfg(test)]

@@ -62,3 +62,18 @@ fn fetch_day_input(year: u32, day: u32, cookie: &str) -> Result<String, AocError
 
     Ok(body.body_mut().read_to_string()?)
 }
+
+pub struct Solution {
+    pub day: u32,
+    pub part1: String,
+    pub part2: String,
+}
+impl Solution {
+    pub fn new(day: u32, part1: &impl ToString, part2: &impl ToString) -> Self {
+        Solution {
+            day,
+            part1: part1.to_string(),
+            part2: part2.to_string(),
+        }
+    }
+}
