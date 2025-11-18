@@ -45,10 +45,15 @@ fn get_cookie(config_dir: &Path) -> Result<String, AocError> {
     if let Ok(cookie) = env::var(COOKIE_ENV) {
         return Ok(cookie);
     }
-    if let Ok(cookie) = read_to_string(config_dir.join(COOKIE_FILE)) {
+    let cookie_file = config_dir.join(COOKIE_FILE);
+    if let Ok(cookie) = read_to_string(cookie_file.clone()) {
         return Ok(cookie.trim().to_string());
     }
 
+    println!(
+        "Could not find cookie, looked in env var {COOKIE_ENV} and in file {}",
+        cookie_file.display()
+    );
     Err(AocError::NoCookie)
 }
 
