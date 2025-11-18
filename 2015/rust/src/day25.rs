@@ -18,7 +18,7 @@ fn parse(input: &str) -> (usize, usize) {
 }
 
 fn value_at_pos(target_row: usize, target_column: usize) -> usize {
-    let mut value = 20151125;
+    let mut value = 2015_1125;
 
     let mut row = 1;
     let mut column = 1;
@@ -31,7 +31,7 @@ fn value_at_pos(target_row: usize, target_column: usize) -> usize {
             row -= 1;
             column += 1;
         }
-        value = (value * 252533) % 33554393;
+        value = (value * 252_533) % 33_554_393;
     }
 
     value
@@ -43,7 +43,7 @@ mod tests {
 
     #[test]
     fn test() {
-        assert_eq!(value_at_pos(4, 4), 9380097);
-        assert_eq!(value_at_pos(6, 6), 27995004);
+        assert_eq!(value_at_pos(4, 4), 9_380_097);
+        assert_eq!(value_at_pos(6, 6), 27_995_004);
     }
 }

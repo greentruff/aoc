@@ -47,14 +47,14 @@ fn most_score(reindeer: &[Reindeer], race_time: u32) -> u32 {
     for _ in 0..race_time {
         let mut max_distance = 0;
 
-        for racer in racers.iter_mut() {
+        for racer in &mut racers {
             racer.step();
             if racer.distance > max_distance {
                 max_distance = racer.distance;
             }
         }
 
-        for racer in racers.iter_mut() {
+        for racer in &mut racers {
             if racer.distance == max_distance {
                 racer.score += 1;
             }

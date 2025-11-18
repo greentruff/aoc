@@ -66,14 +66,14 @@ fn single_mutations(
     replacements: &HashMap<String, Vec<String>>,
 ) -> HashSet<String> {
     let mut mutations = HashSet::new();
-    for (key, targets) in replacements.iter() {
+    for (key, targets) in replacements {
         for target in targets {
             molecule.match_indices(key).for_each(|(idx, _)| {
                 let left = &molecule[0..idx];
                 let right = &molecule[idx + key.len()..];
 
                 mutations.insert(format!("{left}{target}{right}"));
-            })
+            });
         }
     }
 

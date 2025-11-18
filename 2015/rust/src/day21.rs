@@ -13,13 +13,13 @@ pub fn solve(input: &str) -> Solution {
 fn player_item_combinations() -> Vec<Item> {
     let mut combinations = Vec::new();
 
-    for weapon in WEAPONS.iter() {
+    for weapon in &WEAPONS {
         combinations.push(weapon.clone());
-        for armor in ARMOR.iter() {
+        for armor in &ARMOR {
             combinations.push(Item::from(&[weapon, armor]));
-            for ring1 in RINGS.iter() {
+            for ring1 in &RINGS {
                 combinations.push(Item::from(&[weapon, armor, ring1]));
-                for ring2 in RINGS.iter() {
+                for ring2 in &RINGS {
                     if ptr::eq(ring1, ring2) {
                         continue;
                     }
@@ -136,11 +136,7 @@ fn parse(input: &str) -> Char {
 
 fn first_wins(char1: &Char, char2: &Char) -> bool {
     fn dmg(damage: u32, armor: u32) -> u32 {
-        if damage > armor {
-            damage - armor
-        } else {
-            1
-        }
+        if damage > armor { damage - armor } else { 1 }
     }
     let char1_damage = dmg(char1.damage, char2.armor);
     let char2_damage = dmg(char2.damage, char1.armor);

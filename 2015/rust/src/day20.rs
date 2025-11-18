@@ -9,7 +9,7 @@ pub fn solve(input: &str) -> Solution {
 }
 
 fn find_first_house(target: u32, mult: u32, max_houses: u32) -> u32 {
-    let mut counts = Box::new([0_u32; 1_000_000]);
+    let mut counts = vec![0_u32; 1_000_000].into_boxed_slice();
 
     for i in 0..counts.len() {
         let mut current_idx = i;

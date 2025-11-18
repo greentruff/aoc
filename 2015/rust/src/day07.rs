@@ -12,12 +12,12 @@ pub fn solve(input: &str) -> Solution {
         .collect::<Vec<_>>();
 
     let mut circuit = Circuit::new();
-    circuit.build(&connections).unwrap();
+    circuit.build(&connections);
     let part1 = circuit.values.get("a").unwrap();
 
     let mut circuit = Circuit::new();
     circuit.values.insert("b".into(), *part1);
-    circuit.build(&connections).unwrap();
+    circuit.build(&connections);
     let part2 = circuit.values.get("a").unwrap();
 
     Solution::new(7, part1, part2)
@@ -75,7 +75,7 @@ enum CircuitError {
 
 fn fmt_ids(ids: &[WireID]) -> String {
     ids.iter()
-        .map(|id| id.to_string())
+        .map(ToString::to_string)
         .collect::<Vec<_>>()
         .join(",")
 }
@@ -87,7 +87,7 @@ impl<'a> Circuit<'a> {
         Self { values, pending }
     }
 
-    fn build(&mut self, connections: &'a Vec<Conn>) -> Result<&Circuit, CircuitError> {
+    fn build(&mut self, connections: &'a Vec<Conn>) -> &Circuit {
         for conn in connections {
             match self.try_op(conn) {
                 Ok(result) => {
@@ -103,7 +103,7 @@ impl<'a> Circuit<'a> {
             }
         }
 
-        Ok(self)
+        self
     }
 
     fn try_op(&self, conn: &Conn) -> Result<u16, CircuitError> {
@@ -184,6 +184,7 @@ impl<'a> Circuit<'a> {
     }
 }
 
+#[allow(clippy::struct_field_names)]
 struct CircuitParser {
     re_value: Regex,
     re_and: Regex,
@@ -285,7 +286,7 @@ NOT y -> i
             .map(|line| parser.parse_line(line))
             .collect::<Vec<_>>();
         let mut circuit = Circuit::new();
-        circuit.build(&connections).unwrap();
+        circuit.build(&connections);
 
         assert_eq!(circuit.values.get("d").unwrap(), &72);
         assert_eq!(circuit.values.get("e").unwrap(), &507);

@@ -1,3 +1,11 @@
+#![warn(clippy::all)]
+#![warn(clippy::pedantic)]
+#![allow(clippy::bool_assert_comparison)]
+#![allow(clippy::match_same_arms)]
+#![allow(clippy::cast_possible_truncation)]
+#![allow(clippy::cast_possible_wrap)]
+#![allow(clippy::cast_sign_loss)]
+
 use crate::aoc::{AocError, Solution, get_day_input};
 use std::env::args;
 
@@ -67,7 +75,7 @@ fn solve_for_day(day: usize) -> Result<Solution, AocError> {
     Ok(SOLVERS[day - 1](&input))
 }
 
-fn print_solution(solution: Solution) {
+fn print_solution(solution: &Solution) {
     println!("==== Day {:>2} ====", solution.day);
     println!("Part 1: {}", solution.part1);
     println!("Part 2: {}", solution.part2);
@@ -75,15 +83,15 @@ fn print_solution(solution: Solution) {
 
 fn main() -> Result<(), AocError> {
     let args = args().skip(1).collect::<Vec<_>>();
-    if !args.is_empty() {
-        let day = args[0].parse::<usize>().unwrap();
-        let solution = solve_for_day(day)?;
-        print_solution(solution);
-    } else {
+    if args.is_empty() {
         for day in 1..=SOLVERS.len() {
             let solution = solve_for_day(day)?;
-            print_solution(solution);
+            print_solution(&solution);
         }
+    } else {
+        let day = args[0].parse::<usize>().unwrap();
+        let solution = solve_for_day(day)?;
+        print_solution(&solution);
     }
 
     Ok(())

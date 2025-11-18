@@ -18,7 +18,11 @@ pub fn solve(input: &str) -> Solution {
     let part1 = input
         .lines()
         .map(parse_line)
-        .find(|s| s.hints.iter().all(|h| known.get(h.0.as_str()) == Some(h.1)))
+        .find(|s| {
+            s.hints
+                .iter()
+                .all(|(hint_key, hint_value)| known.get(hint_key.as_str()) == Some(hint_value))
+        })
         .unwrap()
         .id;
 
@@ -26,11 +30,13 @@ pub fn solve(input: &str) -> Solution {
         .lines()
         .map(parse_line)
         .find(|s| {
-            s.hints.iter().all(|h| match h.0.as_str() {
-                "cats" | "trees" => Some(h.1) > known.get(h.0.as_str()),
-                "pomeranians" | "goldfish" => Some(h.1) < known.get(h.0.as_str()),
-                _ => Some(h.1) == known.get(h.0.as_str()),
-            })
+            s.hints
+                .iter()
+                .all(|(hint_key, hint_value)| match hint_key.as_str() {
+                    "cats" | "trees" => Some(hint_value) > known.get(hint_key.as_str()),
+                    "pomeranians" | "goldfish" => Some(hint_value) < known.get(hint_key.as_str()),
+                    _ => Some(hint_value) == known.get(hint_key.as_str()),
+                })
         })
         .unwrap()
         .id;

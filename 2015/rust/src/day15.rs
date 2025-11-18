@@ -80,9 +80,10 @@ struct PartitionIter {
 }
 
 fn int_partitions(sum: i32, parts: usize) -> PartitionIter {
-    if parts < 2 || parts > sum as usize {
-        panic!("Invalid number of parts ({parts}) passed");
-    }
+    assert!(
+        parts >= 2 || parts <= sum as usize,
+        "Invalid number of parts ({parts}) passed"
+    );
     PartitionIter {
         total: sum,
         counts: vec![0; parts],
@@ -99,7 +100,7 @@ impl Iterator for PartitionIter {
                 self.state = Generating;
                 let len = self.counts.len();
                 self.counts[len - 1] = self.total;
-                Some(self.counts.to_vec())
+                Some(self.counts.clone())
             }
             Generating => {
                 let len = self.counts.len();
@@ -107,7 +108,7 @@ impl Iterator for PartitionIter {
                 let mut idx = 0;
 
                 self.running_sum.clear();
-                for count in self.counts.iter() {
+                for count in &self.counts {
                     sum += *count;
                     self.running_sum.push(sum);
                     if sum == self.total {
@@ -127,7 +128,7 @@ impl Iterator for PartitionIter {
                     self.state = Done;
                 }
 
-                Some(self.counts.to_vec())
+                Some(self.counts.clone())
             }
             Done => None,
         }
@@ -166,6 +167,6 @@ Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3";
     #[test]
     fn test_partitions() {
         assert_eq!(int_partitions(6, 4).count(), 84);
-        assert_eq!(int_partitions(100, 4).count(), 176851);
+        assert_eq!(int_partitions(100, 4).count(), 176_851);
     }
 }

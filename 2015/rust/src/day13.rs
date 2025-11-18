@@ -18,7 +18,7 @@ pub fn solve(input: &str) -> Solution {
     let part1 = (0..guest_ids.len())
         .permutations(guest_ids.len())
         .map(|perm| {
-            let mut ring = perm.to_vec();
+            let mut ring = perm.clone();
             ring.push(perm[0]);
 
             ring.windows(2)

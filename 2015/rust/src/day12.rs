@@ -18,7 +18,7 @@ fn count_numbers(input: &str, ignore_red: bool) -> i64 {
         }
 
         let values = if let Value::Array(array) = &current {
-            array.to_vec()
+            array.clone()
         } else if let Value::Object(obj) = &current {
             if ignore_red && obj.values().any(|v| v == &json!("red")) {
                 vec![]
@@ -34,10 +34,7 @@ fn count_numbers(input: &str, ignore_red: bool) -> i64 {
                 Value::Number(n) => {
                     sum += n.as_i64().unwrap();
                 }
-                Value::Array(_) => {
-                    pending.push(value.clone());
-                }
-                Value::Object(_) => {
+                Value::Array(_) | Value::Object(_) => {
                     pending.push(value.clone());
                 }
                 _ => {}

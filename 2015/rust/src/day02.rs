@@ -14,7 +14,7 @@ impl Present {
 
     fn ribbon_needed(&self) -> u32 {
         let mut lengths = [self.0, self.1, self.2];
-        lengths.sort();
+        lengths.sort_unstable();
 
         2 * lengths[0] + 2 * lengths[1] + lengths.iter().product::<u32>()
     }
@@ -22,15 +22,15 @@ impl Present {
 
 pub fn solve(input: &str) -> Solution {
     let presents: Vec<Present> = input
-        .split_terminator("\n")
+        .split_terminator('\n')
         .map(|line| {
             let dimensions: Vec<u32> = line.splitn(3, 'x').map(|d| d.parse().unwrap()).collect();
             Present(dimensions[0], dimensions[1], dimensions[2])
         })
         .collect();
 
-    let part1: u32 = presents.iter().map(|x| x.paper_needed()).sum();
-    let part2: u32 = presents.iter().map(|x| x.ribbon_needed()).sum();
+    let part1: u32 = presents.iter().map(Present::paper_needed).sum();
+    let part2: u32 = presents.iter().map(Present::ribbon_needed).sum();
 
     Solution::new(2, &part1, &part2)
 }

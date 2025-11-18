@@ -13,14 +13,14 @@ pub fn solve(input: &str) -> Solution {
     let smallest_groups = find_smallest_group_with_3_partition(&packages, total);
     let part1: u64 = smallest_groups
         .iter()
-        .map(|group| group.iter().map(|x| *x as u64).product::<u64>())
+        .map(|group| group.iter().map(|x| u64::from(*x)).product::<u64>())
         .min()
         .unwrap();
 
     let smallest_groups = find_smallest_group_with_4_partition(&packages, total);
     let part2 = smallest_groups
         .iter()
-        .map(|group| group.iter().map(|x| *x as u64).product::<u64>())
+        .map(|group| group.iter().map(|x| u64::from(*x)).product::<u64>())
         .min()
         .unwrap();
     Solution::new(24, &part1, &part2)
@@ -113,10 +113,10 @@ fn can_partition_equally(numbers: &[u32]) -> bool {
 
     let mut marker_table = MarkerTable::new(target + 1, n + 1);
 
-    for j in 0..n + 1 {
-        marker_table.set(0, j, true)
+    for j in 0..=n {
+        marker_table.set(0, j, true);
     }
-    for i in 1..target + 1 {
+    for i in 1..=target {
         marker_table.set(i, 0, false);
     }
 
@@ -137,7 +137,6 @@ fn can_partition_equally(numbers: &[u32]) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::collections::HashSet;
 
     #[test]
     fn test_partition() {
@@ -159,6 +158,6 @@ mod tests {
         assert_eq!(
             find_groups_of_size_3_partitions(2, &[1, 2, 3, 4, 5, 7, 8, 9, 10, 11], 20),
             vec![vec![9, 11]]
-        )
+        );
     }
 }

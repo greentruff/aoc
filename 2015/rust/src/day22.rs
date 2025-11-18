@@ -3,8 +3,8 @@ use std::collections::HashMap;
 
 use crate::aoc::Solution;
 use crate::day22::Difficulty::{EasyMode, HardMode};
-use crate::day22::Spell::*;
-use crate::day22::TurnResult::*;
+use crate::day22::Spell::{Drain, MagicMissile, Poison, Recharge, Shield};
+use crate::day22::TurnResult::{InProgress, Invalid, Lost, Won};
 
 pub fn solve(input: &str) -> Solution {
     let boss = parse_boss(input);
@@ -216,7 +216,7 @@ struct FightProgress {
 impl FightProgress {
     fn apply_turn_effects(&mut self) -> i32 {
         let mut armor = 0;
-        for (eff_spell, turns) in self.effects.iter_mut() {
+        for (eff_spell, turns) in &mut self.effects {
             let eff_stats = spell_stats(eff_spell);
             if *turns > 0 {
                 *turns -= 1;
@@ -324,7 +324,7 @@ mod tests {
             .iter()
             .map(|s| spell_stats(s).cost)
             .sum::<i32>();
-        assert_eq!(most_efficient_fight(10, 250, 13, 8, EasyMode), expected)
+        assert_eq!(most_efficient_fight(10, 250, 13, 8, EasyMode), expected);
     }
 
     #[test]

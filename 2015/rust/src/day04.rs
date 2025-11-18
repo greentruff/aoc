@@ -9,6 +9,7 @@ const MD5_S : [u32; 64 ] = [
 ];
 
 #[rustfmt::skip]
+#[allow(clippy::unreadable_literal)]
 const MD5_K : [u32; 64 ] = [
     0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
     0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
@@ -28,11 +29,16 @@ const MD5_K : [u32; 64 ] = [
     0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391,
 ];
 
+#[allow(clippy::unreadable_literal)]
 const MD5_A: u32 = 0x67452301;
+#[allow(clippy::unreadable_literal)]
 const MD5_B: u32 = 0xefcdab89;
+#[allow(clippy::unreadable_literal)]
 const MD5_C: u32 = 0x98badcfe;
+#[allow(clippy::unreadable_literal)]
 const MD5_D: u32 = 0x10325476;
 
+#[allow(clippy::many_single_char_names)]
 fn md5(input: &str) -> String {
     let input_bytes = input.as_bytes();
     let bitcount = input_bytes.len().wrapping_mul(8) as u64;

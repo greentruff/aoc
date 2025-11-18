@@ -82,7 +82,7 @@ impl Display for Op {
                 write!(f, "jio {reg} ")?;
                 write_offset(f, *offset)?;
             }
-        };
+        }
         Ok(())
     }
 }
@@ -90,7 +90,7 @@ impl Display for Op {
 fn parse(input: &str) -> Vec<Op> {
     let mut ops = Vec::new();
     for line in input.lines() {
-        let mut parts = line.splitn(2, " ");
+        let mut parts = line.splitn(2, ' ');
         if let (Some(instruction), Some(args)) = (parts.next(), parts.next()) {
             let op = match instruction {
                 "hlf" => Hlf(Register::from(args).unwrap()),
@@ -124,7 +124,6 @@ fn run(regs: RegisterSet, instructions: &[Op]) -> RegisterSet {
 
     while ip >= 0 && ip < instructions.len() as i32 {
         let op = &instructions[ip as usize];
-        // print!("ip: {ip} op: {op} => ");
         match op {
             Hlf(reg) => {
                 let r = regs.get(reg);
@@ -161,7 +160,6 @@ fn run(regs: RegisterSet, instructions: &[Op]) -> RegisterSet {
                 }
             }
         }
-        // println!("ip: {ip} a: {}, b: {}", regs.0, regs.1);
     }
 
     regs
