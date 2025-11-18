@@ -49,20 +49,14 @@ fn is_part2_nice(s: &str) -> bool {
     let mut has_split_pair = false;
 
     let mut seen = HashMap::new();
-    let initial_pair = Pair {
-        first: chars[0],
-        second: chars[1],
-    };
+    let initial_pair = Pair { first: chars[0], second: chars[1] };
     seen.insert(initial_pair, 0);
     for idx in 2..chars.len() {
         let a = chars[idx - 2];
         let b = chars[idx - 1];
         let c = chars[idx];
 
-        let pair = Pair {
-            first: b,
-            second: c,
-        };
+        let pair = Pair { first: b, second: c };
         let pair_idx = idx - 1;
         let previous_idx = seen.entry(pair).or_insert(idx - 1);
         if (pair_idx - *previous_idx) >= 2 {
