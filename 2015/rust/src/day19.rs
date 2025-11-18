@@ -80,9 +80,9 @@ fn single_mutations(
     mutations
 }
 
-const OPEN: &'static str = "Rn";
-const SEPARATOR: &'static str = "Y";
-const CLOSE: &'static str = "Ar";
+const OPEN: &str = "Rn";
+const SEPARATOR: &str = "Y";
+const CLOSE: &str = "Ar";
 /**
 Relies on replacements having one of two forms:
 - `A` => `BC` : Always one -> two atoms
@@ -121,7 +121,7 @@ mod tests {
         assert_eq!(count("AB"), 1);
         assert_eq!(count("ABCD"), 3);
         assert_eq!(count("ARnBAr"), 1);
-        assert_eq!(count("ARnBCAr"), 1);
+        assert_eq!(count("ARnBCAr"), 2);
         assert_eq!(count("ARnBYCAr"), 1);
         assert_eq!(count("ABCRnABCYABCAr"), 7);
         assert_eq!(count("CRnMgYSiRnFYFArFAr"), 3);
