@@ -12,21 +12,26 @@ mod day7;
 mod day8;
 mod day9;
 
-fn solve_for_day(day: u32) -> Result<Solution, AocError> {
+const SOLVERS: [fn(&str) -> Solution; 9] = [
+    day1::solve,
+    day2::solve,
+    day3::solve,
+    day4::solve,
+    day5::solve,
+    day6::solve,
+    day7::solve,
+    day8::solve,
+    day9::solve,
+];
+
+fn solve_for_day(day: usize) -> Result<Solution, AocError> {
     let input = get_day_input(2015, day)?;
-    let solution = match day {
-        1 => day1::solve(&input),
-        2 => day2::solve(&input),
-        3 => day3::solve(&input),
-        4 => day4::solve(&input),
-        5 => day5::solve(&input),
-        6 => day6::solve(&input),
-        7 => day7::solve(&input),
-        8 => day8::solve(&input),
-        9 => day9::solve(&input),
-        _ => unimplemented!(),
-    };
-    Ok(solution)
+
+    if day > SOLVERS.len() {
+        unimplemented!()
+    }
+
+    Ok(SOLVERS[day - 1](&input))
 }
 
 fn print_solution(solution: Solution) {
@@ -38,11 +43,11 @@ fn print_solution(solution: Solution) {
 fn main() -> Result<(), AocError> {
     let args = args().skip(1).collect::<Vec<_>>();
     if !args.is_empty() {
-        let day = args[0].parse::<u32>().unwrap();
+        let day = args[0].parse::<usize>().unwrap();
         let solution = solve_for_day(day)?;
         print_solution(solution);
     } else {
-        for day in 1..=9 {
+        for day in 1..=SOLVERS.len() {
             let solution = solve_for_day(day)?;
             print_solution(solution);
         }

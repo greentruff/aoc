@@ -21,7 +21,7 @@ pub enum AocError {
     HttpError(#[from] ureq::Error),
 }
 
-pub fn get_day_input(year: u32, day: u32) -> Result<String, AocError> {
+pub fn get_day_input(year: usize, day: usize) -> Result<String, AocError> {
     let project_dirs =
         ProjectDirs::from("com", "truff", "aoc").ok_or_else(|| AocError::NoConfigPath)?;
     let config_dir = project_dirs.config_dir();
@@ -45,14 +45,14 @@ fn get_cookie(config_dir: &Path) -> Result<String, AocError> {
     if let Ok(cookie) = env::var(COOKIE_ENV) {
         return Ok(cookie);
     }
-    if let Ok(cookie) = fs::read_to_string(config_dir.join(COOKIE_FILE)) {
+    if let Ok(cookie) = read_to_string(config_dir.join(COOKIE_FILE)) {
         return Ok(cookie.trim().to_string());
     }
 
     Err(AocError::NoCookie)
 }
 
-fn fetch_day_input(year: u32, day: u32, cookie: &str) -> Result<String, AocError> {
+fn fetch_day_input(year: usize, day: usize, cookie: &str) -> Result<String, AocError> {
     let url = format!("https://adventofcode.com/{year}/day/{day}/input");
 
     let mut body = ureq::get(&url)

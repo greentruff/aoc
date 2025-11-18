@@ -4,8 +4,8 @@ use itertools::MinMaxResult::MinMax;
 use regex::Regex;
 use std::collections::HashMap;
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
-    let distance_list = input.as_ref().lines().map(parse_line).collect::<Vec<_>>();
+pub fn solve(input: &str) -> Solution {
+    let distance_list = input.lines().map(parse_line).collect::<Vec<_>>();
 
     let mut city_ids = HashMap::new();
     let mut distances = HashMap::new();

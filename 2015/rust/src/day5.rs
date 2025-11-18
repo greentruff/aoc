@@ -77,10 +77,10 @@ fn is_part2_nice(s: &str) -> bool {
     has_double_pair && has_split_pair
 }
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
+pub fn solve(input: &str) -> Solution {
     let mut part1_count = 0;
     let mut part2_count = 0;
-    for line in input.as_ref().lines() {
+    for line in input.lines() {
         if is_part1_nice(line) {
             part1_count += 1;
         }

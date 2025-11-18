@@ -4,10 +4,9 @@ use regex::Regex;
 use std::collections::HashMap;
 use thiserror::Error;
 
-pub fn solve(input: impl AsRef<str>) -> Solution {
+pub fn solve(input: &str) -> Solution {
     let parser = CircuitParser::new();
     let connections = input
-        .as_ref()
         .lines()
         .map(|line| parser.parse_line(line))
         .collect::<Vec<_>>();
