@@ -88,8 +88,8 @@ pub fn solve(input: impl AsRef<str>) {
         }
     }
 
-    println!("Part 1: {}", part1_count);
-    println!("Part 2: {}", part2_count);
+    println!("Part 1: {part1_count}");
+    println!("Part 2: {part2_count}");
 }
 
 #[cfg(test)]
