@@ -1,4 +1,4 @@
-use crate::aoc::{AocError, Solution, get_day_input};
+use crate::aoc::{get_day_input, AocError, Solution};
 use std::env::args;
 
 mod aoc;
@@ -23,9 +23,10 @@ mod day18;
 mod day19;
 mod day20;
 mod day21;
+mod day22;
 mod utils;
 
-const SOLVERS: [fn(&str) -> Solution; 21] = [
+const SOLVERS: [fn(&str) -> Solution; 22] = [
     day01::solve,
     day02::solve,
     day03::solve,
@@ -47,6 +48,7 @@ const SOLVERS: [fn(&str) -> Solution; 21] = [
     day19::solve,
     day20::solve,
     day21::solve,
+    day22::solve,
 ];
 
 fn solve_for_day(day: usize) -> Result<Solution, AocError> {
