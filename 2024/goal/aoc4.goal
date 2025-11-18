@@ -1,0 +1,34 @@
+I:-1 _ =read"i/04"
+
+cnt: {+/#'rx/XMAS/[x;-1]}                      / count S in matrix
+toc: ""\
+tos: ""/
+diag: {tos (+ (!&*x) rotate'toc (+[;" "]'x))}  / downright diags matrix
+mirr: {tos@|' toc x}
+
+M: mirr I                                      / vertical symmetry
+F: tos@+ toc I                               / diagonal symmetry
+
+/ ....XXMAS.
+/ .SAMXMS...
+/ ...S..A...
+/ ..A.A.MS.X
+/ XMASAMX.MM
+/ X.....XA.A
+/ S.S.S.S.SS
+/ .A.A.A.A.A
+/ ..M.M.M.MM
+/ .X.X.XMASX
+
+r: (
+    (cnt I)           /right
+    (cnt M)           /left
+    (cnt F)           /down
+    (cnt (mirr F))    /up
+    (cnt (diag I))    /down right
+    (cnt (diag M))    /down left
+    (cnt (diag (|I))) /up right
+    (cnt (diag (|M))) /up left
+)
+
+say +/r / part1
